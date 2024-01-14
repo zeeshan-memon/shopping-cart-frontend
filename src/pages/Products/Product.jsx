@@ -35,7 +35,7 @@ function updateOrAdd(array, key, value, item) {
     setCartItems()
   } else {
     // Object with the specified value doesn't exist, add a new object
-    setCartItems(newData);
+    setCartItems(item);
   }
 }
   const loadProducts = async () => {
