@@ -29,7 +29,6 @@ function updateOrAddToCart(value, item) {
       setProducts(response.data.response);
     //   setCartItems(response.data.response)
     } catch (error) {
-      console.log("error", error);
     }
   };
   useEffect(() => {

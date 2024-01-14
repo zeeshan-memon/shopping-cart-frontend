@@ -17,7 +17,6 @@ const Cart = ({ open, setOpen, cartItems, setCartItems }) => {
   };
 
   useEffect(() => {
-    console.log('cartItems', cartItems)
 
   }, [cartItems]);
 
