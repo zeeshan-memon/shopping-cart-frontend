@@ -1,49 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { getProducts } from "../../Ations/ProductActin";
 import { Col, Card, Row, Button, InputNumber } from "antd";
-import { getValue } from "@testing-library/user-event/dist/utils";
-const { Meta } = Card;
 
 const Product = ({setCartItems, cartItems}) => {
   const [products, setProducts] = useState([]);
   const [items, setItems] = useState([]);
 
-  const onChange = (item) => {
-    console.log(item)
-    if(items.length == 0){
-        const _item = item
-        _item.quantity = 1
-        setItems([...items, _item])
-    }else{
 
-    }
-  };
-
-  const addToCart = (item) => {
-   item.quantity = (item.quantity)?item.quantity:1
-   setCartItems([...cartItems, items])
-  };
-
-  // Function to check if object with a specific value exists and update or add accordingly
-function updateOrAdd(array, key, value, item) {
-    item.quantity = (item.quantity)?item.quantity:1
-  const index = array.findIndex(obj => obj[key] === value);
-
+function updateOrAddToCart(value, item) {
+    const _cartItems = [...cartItems]
+  const index = _cartItems.findIndex(obj => obj._id === value);
   if (index !== -1) {
-    // Object with the specified value exists, update it
-    array[index] = { ...array[index], ...item };
-    setCartItems()
+    const quantity = (item.quantity !== undefined)?item.quantity:1
+    _cartItems[index].quantity = _cartItems[index].quantity + quantity
+    setCartItems(_cartItems)
   } else {
-    // Object with the specified value doesn't exist, add a new object
-    setCartItems(item);
+    let _item = {...item}
+        _item.quantity = (_item.quantity !== undefined)?item.quantity:1
+
+    _cartItems.push(_item)
+    setCartItems(_cartItems);
   }
 }
+
   const loadProducts = async () => {
     try {
       const response = await getProducts();
-      console.log(response.data.response);
       setProducts(response.data.response);
-      setCartItems(response.data.response)
+    //   setCartItems(response.data.response)
     } catch (error) {
       console.log("error", error);
     }
@@ -81,10 +65,9 @@ function updateOrAdd(array, key, value, item) {
                     <p>{item?.description}</p>
                     <strong style={{color:"red"}}>Rs: {item?.price}</strong>
                     <div>Quantity <InputNumber min={1}  defaultValue={1} onChange={(val)=>{
-                        products[key].quantity =val
-
+                        item.quantity = val
                     }} style={{marginLeft:"10px"}} /></div>
-                    <Button type="primary" style={{marginTop:"10px"}}>Add to cart</Button>
+                    <Button type="primary" style={{marginTop:"10px"}} onClick={()=>updateOrAddToCart( item._id, item)}>Add to cart</Button>
                 </div>
               
             </Card>

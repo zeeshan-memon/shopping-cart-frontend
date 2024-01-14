@@ -58,7 +58,7 @@ const AppBar = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-            <Cart open={open} setOpen={setOpen} cartItems={cartItems}/>
+            <Cart open={open} setOpen={setOpen} setCartItems={setCartItems} cartItems={cartItems}/>
           <Product setCartItems={setCartItems} cartItems={cartItems}/>
         </div>
       </Content>
