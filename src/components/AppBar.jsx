@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import { Layout, Menu, theme, Card } from 'antd';
+import { Layout, Menu, theme, Card, } from 'antd';
 import { ShoppingCartOutlined, ShoppingOutlined } from '@ant-design/icons';
 import Product from '../pages/Products/Product';
 import Cart from './Cart';
-const { Header, Content, Footer } = Layout;
+const { Header, Content, Footer,  } = Layout;
 
 const items = [
     {key: 1,
@@ -16,6 +16,8 @@ const AppBar = () => {
     const loadCart = ()=>{
         setOpen(!open)
     }
+
+  
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
